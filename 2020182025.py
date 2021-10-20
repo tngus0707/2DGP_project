@@ -85,8 +85,15 @@ while running:
     enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
     enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
     enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
+    enemy1_frame = (enemy1_frame + 1) % 4
+    delay(0.03)
+
     enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
+    enemy2_frame = (enemy2_frame + 1) % 4
+    delay(0.03)
+
     enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
+    enemy3_frame = (enemy3_frame + 1) % 3
     door.draw(670, 320)
 
     if UDLR == 0:
@@ -140,7 +147,7 @@ while running:
 
         frame = (frame + 1) % 10
         x += dirX
-        delay(0.03)
+        delay(0.01)
 
         handle_events()
 
@@ -167,7 +174,7 @@ while running:
 
         frame = (frame + 1) % 10
         x += dirX
-        delay(0.03)
+        delay(0.01)
 
         handle_events()
 
@@ -195,7 +202,7 @@ while running:
 
         frame = (frame + 1) % 10
         y += dirY
-        delay(0.03)
+        delay(0.01)
 
         handle_events()
 
@@ -223,7 +230,7 @@ while running:
 
         frame = (frame + 1) % 10
         y += dirY
-        delay(0.03)
+        delay(0.01)
 
         handle_events()
 
