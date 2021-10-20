@@ -17,16 +17,16 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_RIGHT:
                 dirX += 5
-                UDLR = 0
+                UDLR = 1
             elif event.key == SDLK_LEFT:
                 dirX -= 5
-                UDLR = 1
+                UDLR = 2
             elif event.key == SDLK_UP:
                 dirY += 5
-                UDLR = 2
+                UDLR = 3
             elif event.key == SDLK_DOWN:
                 dirY -= 5
-                UDLR = 3
+                UDLR = 4
             elif event.key == SDLK_k:
                 knife_pos = 1
                 attack_pos = 0
@@ -58,14 +58,15 @@ knife = load_image('knife.png')
 knifeUP = load_image('knife_up.png')
 knifeDOWN = load_image('knife_down.png')
 attack = load_image('attack.png')
+door = load_image('door.png')
 
 running = True
 UDLR = 0
 knife_pos = 0
 attack_pos = 0
 
-x = 800 // 2
-y = 600 // 2
+x = 670
+y = 320
 
 frame = 0
 enemy1_frame = 0
@@ -86,8 +87,36 @@ while running:
     enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
     enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
     enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
+    door.draw(670, 320)
 
     if UDLR == 0:
+        if knife_pos == 1:
+            knife.clip_draw(knife_frame * 40, 0, 40, 40, x + 20, y)
+            update_canvas()
+
+        if attack_pos == 1:
+            attack.clip_draw(attack_frame * 50, 0, 50, 50, x + 50, y - 10)
+            update_canvas()
+
+        character.clip_draw(frame * 50, 350, 50, 50, x, y) #left, bottom, width, height, x, y
+        update_canvas()
+
+        clear_canvas()
+        cave.draw(width // 2, height // 2)
+        character.clip_draw(frame * 50, 350, 50, 50, x, y)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
+        enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
+        enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
+        door.draw(670, 320)
+
+        frame = (frame + 1) % 3
+        delay(0.1)
+
+        handle_events()
+
+    if UDLR == 1:
 
         if knife_pos == 1:
             knife.clip_draw(knife_frame * 40, 0, 40, 40, x + 20, y)
@@ -107,6 +136,7 @@ while running:
         enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
         enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
         enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
+        door.draw(670, 320)
 
         frame = (frame + 1) % 10
         x += dirX
@@ -114,7 +144,7 @@ while running:
 
         handle_events()
 
-    if UDLR == 1:
+    if UDLR == 2:
         if knife_pos == 1:
             knife.clip_draw(knife_frame * 40, 40, 40, 40, x - 30, y)
             update_canvas()
@@ -133,6 +163,7 @@ while running:
         enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
         enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
         enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
+        door.draw(670, 320)
 
         frame = (frame + 1) % 10
         x += dirX
@@ -140,7 +171,7 @@ while running:
 
         handle_events()
 
-    if UDLR == 2:
+    if UDLR == 3:
 
         if knife_pos == 1:
             knifeUP.clip_draw(knifeUP_frame * 38, 0, 38, 32, x, y + 40)
@@ -160,6 +191,7 @@ while running:
         enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
         enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
         enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
+        door.draw(670, 320)
 
         frame = (frame + 1) % 10
         y += dirY
@@ -167,7 +199,7 @@ while running:
 
         handle_events()
 
-    if UDLR == 3:
+    if UDLR == 4:
 
         if knife_pos == 1:
             knifeDOWN.clip_draw(knifeDOWN_frame * 40, 0, 40, 46, x, y - 40)
@@ -187,6 +219,7 @@ while running:
         enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
         enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
         enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
+        door.draw(670, 320)
 
         frame = (frame + 1) % 10
         y += dirY
