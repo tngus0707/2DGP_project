@@ -102,6 +102,11 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
+        enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
+        enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
 
         frame = (frame + 1) % 10
         x += dirX
@@ -123,6 +128,11 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
+        enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
+        enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
 
         frame = (frame + 1) % 10
         x += dirX
@@ -145,6 +155,11 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
+        enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
+        enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
 
         frame = (frame + 1) % 10
         y += dirY
@@ -167,6 +182,11 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
+        enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
+        enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
 
         frame = (frame + 1) % 10
         y += dirY
