@@ -48,6 +48,7 @@ character = load_image('animation_sheet.png')
 enemy1 = load_image('enemy1.png')
 knife = load_image('knife.png')
 knifeUP = load_image('knife_up.png')
+knifeDOWN = load_image('knife_down.png')
 
 running = True
 UDLR = 0
@@ -60,6 +61,7 @@ frame = 0
 enemy1_frame = 0
 knife_frame = 0
 knifeUP_frame = 0
+knifeDOWN_frame = 0
 dirX = 0
 dirY = 0
 
@@ -88,7 +90,7 @@ while running:
 
     if UDLR == 1:
         if knife_pos == 1:
-            knife.clip_draw(knife_frame * 40, 40, 40, 40, x - 20, y - 10)
+            knife.clip_draw(knife_frame * 40, 40, 40, 40, x - 30, y - 10)
             update_canvas()
 
 
@@ -126,6 +128,10 @@ while running:
         handle_events()
 
     if UDLR == 3:
+        if knife_pos == 1:
+            knifeDOWN.clip_draw(knifeDOWN_frame * 40, 0, 40, 46, x, y - 40)
+            update_canvas()
+
         character.clip_draw(frame * 50, 150, 50, 50, x, y)
         update_canvas()
 
