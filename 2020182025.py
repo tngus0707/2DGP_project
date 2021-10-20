@@ -2,8 +2,6 @@ from pico2d import *
 
 width, height = 800, 600
 
-
-
 def handle_events():
     global running
     global dirX
@@ -44,18 +42,21 @@ def handle_events():
 open_canvas(width, height)
 cave = load_image('cave.png')
 character = load_image('animation_sheet.png')
+enemy1 = load_image('enemy1.png')
 
 running = True
 UDLR = 0
 x = 800 // 2
 y = 600 // 2
 frame = 0
+enemy1_frame = 0
 dirX = 0
 dirY = 0
 
 while running:
     clear_canvas()
     cave.draw(width // 2, height // 2)
+    enemy1.clip_draw(enemy1_frame * 30, 170, 35, 30, 200, 400)
 
     if UDLR == 0:
 
