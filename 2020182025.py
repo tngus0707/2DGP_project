@@ -2,14 +2,12 @@ from pico2d import *
 
 width, height = 800, 600
 
-open_canvas(width, height)
 
-cave = load_image('cave.png')
-character = load_image('animation_sheet.png')
 
 def handle_events():
     global running
     global dir
+    global LR
 
     events = get_events()
     for event in events:
@@ -30,7 +28,11 @@ def handle_events():
             elif event.key == SDLK_LEFT:
                 dir += 1
 
+    pass
 
+open_canvas(width, height)
+cave = load_image('cave.png')
+character = load_image('animation_sheet.png')
 
 running = True
 LR = 1
@@ -46,26 +48,30 @@ while running:
 
         character.clip_draw(frame * 50, 0, 50, 50, x, 90) #left, bottom, width, height, x, y
         update_canvas()
+
         clear_canvas()
         cave.draw(width // 2, height // 2)
-
-        handle_events()
 
         frame = (frame + 1) % 10
         x += dir * 5
         delay(0.03)
+
+        handle_events()
 
     if LR == 0:
 
         character.clip_draw(frame * 50, 100, 50, 50, x, 90)
         update_canvas()
+
         clear_canvas()
         cave.draw(width // 2, height // 2)
-
-        handle_events()
 
         frame = (frame + 1) % 10
         x += dir * 5
         delay(0.03)
+
+        handle_events()
+
+    handle_events()
 
 close_canvas()
