@@ -52,6 +52,8 @@ open_canvas(width, height)
 cave = load_image('cave.png')
 character = load_image('animation_sheet.png')
 enemy1 = load_image('enemy1.png')
+enemy2 = load_image('enemy2.png')
+enemy3 = load_image('enemy3.png')
 knife = load_image('knife.png')
 knifeUP = load_image('knife_up.png')
 knifeDOWN = load_image('knife_down.png')
@@ -67,6 +69,8 @@ y = 600 // 2
 
 frame = 0
 enemy1_frame = 0
+enemy2_frame = 0
+enemy3_frame = 0
 knife_frame = 0
 knifeUP_frame = 0
 knifeDOWN_frame = 0
@@ -77,7 +81,11 @@ dirY = 0
 while running:
     clear_canvas()
     cave.draw(width // 2, height // 2)
-    enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 200, 400)
+    enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
+    enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
+    enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
+    enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
+    enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
 
     if UDLR == 0:
 
@@ -111,7 +119,6 @@ while running:
             update_canvas()
 
         character.clip_draw(frame * 50, 100, 50, 50, x, y)
-
         update_canvas()
 
         clear_canvas()
@@ -121,9 +128,7 @@ while running:
         x += dirX
         delay(0.03)
 
-
-
-    handle_events()
+        handle_events()
 
     if UDLR == 2:
 
@@ -148,6 +153,7 @@ while running:
         handle_events()
 
     if UDLR == 3:
+
         if knife_pos == 1:
             knifeDOWN.clip_draw(knifeDOWN_frame * 40, 0, 40, 46, x, y - 40)
             update_canvas()
@@ -168,6 +174,6 @@ while running:
 
         handle_events()
 
-    handle_events()
+handle_events()
 
 close_canvas()
