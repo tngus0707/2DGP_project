@@ -88,6 +88,7 @@ while running:
     enemy1_frame = (enemy1_frame + 1) % 4
     delay(0.03)
 
+
     enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
     enemy2_frame = (enemy2_frame + 1) % 4
     delay(0.03)
