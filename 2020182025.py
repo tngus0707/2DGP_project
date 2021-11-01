@@ -93,6 +93,7 @@ while running:
     enemy2_frame = (enemy2_frame + 1) % 4
     delay(0.03)
 
+
     enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
     enemy3_frame = (enemy3_frame + 1) % 3
     door.draw(670, 320)
