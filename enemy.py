@@ -37,5 +37,5 @@ class Enemy:
         self.image.clip_draw(self.frame * self.sizeX, self.bottom, self.sizeX, self.sizeY, self.x, self.y)
 
     def update(self):
-        self.frame = (self.frame + 1) & self.frame_count
+        self.frame = (self.frame + 1) % self.frame_count
         delay(0.03)
