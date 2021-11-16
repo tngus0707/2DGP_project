@@ -1,4 +1,7 @@
 from pico2d import *
+import enemy
+import attack
+import character
 
 width, height = 800, 600
 
@@ -32,22 +35,26 @@ def handle_events():
         elif event.type == SDL_KEYDOWN:
             if event.key == SDLK_RIGHT:
                 dirX += 5
-                UDLR = 1
+                attackClass.UDLR = 1
+                characterClass.UDLR = 1
             elif event.key == SDLK_LEFT:
                 dirX -= 5
-                UDLR = 2
+                attackClass.UDLR = 2
+                characterClass.UDLR = 2
             elif event.key == SDLK_UP:
                 dirY += 5
-                UDLR = 3
+                attackClass.UDLR = 3
+                characterClass.UDLR = 3
             elif event.key == SDLK_DOWN:
                 dirY -= 5
-                UDLR = 4
+                attackClass.UDLR = 4
+                characterClass.UDLR = 4
             elif event.key == SDLK_k:
-                knife_pos = 1
-                attack_pos = 0
+                attackClass.knife_pos = 1
+                attackClass.light_pos = 0
             elif event.key == SDLK_l:
-                attack_pos = 1
-                knife_pos = 0
+                attackClass.light_pos = 1
+                attackClass.knife_pos = 0
             elif event.key == SDLK_ESCAPE:
                 running = False
         elif event.type == SDL_KEYUP:
@@ -65,20 +72,17 @@ def handle_events():
 open_canvas(width, height)
 
 cave = load_image('cave.png')
-character = load_image('animation_sheet.png')
+characters = load_image('animation_sheet.png')
 enemy1 = load_image('enemy1.png')
 enemy2 = load_image('enemy2.png')
 enemy3 = load_image('enemy3.png')
 knife = load_image('knife.png')
+light = load_image('attack.png')
 knifeUP = load_image('knife_up.png')
 knifeDOWN = load_image('knife_down.png')
-attack = load_image('attack.png')
 door = load_image('door.png')
 
 running = True
-UDLR = 0
-knife_pos = 0
-attack_pos = 0
 
 x = 670
 y = 320
@@ -90,44 +94,44 @@ enemy3_frame = 0
 knife_frame = 0
 knifeUP_frame = 0
 knifeDOWN_frame = 0
-attack_frame = 0
+light_frame = 0
 dirX = 0
 dirY = 0
+
+enemyClass = []
+enemyClass.append(enemy.Enemy(320, 130, 'enemy1'))
+enemyClass.append(enemy.Enemy(320, 160, 'enemy1'))
+enemyClass.append(enemy.Enemy(320, 190, 'enemy1'))
+enemyClass.append(enemy.Enemy(150, 230, 'enemy2'))
+enemyClass.append(enemy.Enemy(180, 480, 'enemy3'))
+
+attackClass = attack.Attack(x, y)
+
+characterClass = character.Character(x, y)
 
 while running:
     clear_canvas()
     cave.draw(width // 2, height // 2)
-    enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
-    enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
-    enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
-    enemy1_frame = (enemy1_frame + 1) % 4
-    delay(0.03)
+    for i in enemyClass:
+        i.draw()
+        i.update()
 
-
-    enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
-    enemy2_frame = (enemy2_frame + 1) % 4
-    delay(0.03)
-
-
-    enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
-    enemy3_frame = (enemy3_frame + 1) % 3
     door.draw(670, 320)
 
-    if UDLR == 0:
-        if knife_pos == 1:
-            knife.clip_draw(knife_frame * 40, 0, 40, 40, x + 20, y)
-            update_canvas()
+    if attackClass.UDLR == 0 or characterClass.UDLR == 0:
+        if attackClass.knife_pos == 1:
+            attackClass.draw()
 
-        if attack_pos == 1:
-            attack.clip_draw(attack_frame * 50, 0, 50, 50, x + 50, y - 10)
-            update_canvas()
+        if attackClass.light_pos == 1:
+            attackClass.draw()
 
-        character.clip_draw(frame * 50, 350, 50, 50, x, y) #left, bottom, width, height, x, y
+        characterClass.draw()
+        characterClass.update()
         update_canvas()
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
-        character.clip_draw(frame * 50, 350, 50, 50, x, y)
+        characters.clip_draw(frame * 50, 350, 50, 50, x, y)
         enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
         enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
         enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
@@ -140,44 +144,19 @@ while running:
 
         handle_events()
 
-    if UDLR == 1:
-
-        if knife_pos == 1:
-            knife.clip_draw(knife_frame * 40, 0, 40, 40, x + 20, y)
-            update_canvas()
-
-        if attack_pos == 1:
-            attack.clip_draw(attack_frame * 50, 0, 50, 50, x + 50, y - 10)
-            update_canvas()
-
-        character.clip_draw(frame * 50, 0, 50, 50, x, y) #left, bottom, width, height, x, y
-        update_canvas()
-
-        clear_canvas()
-        cave.draw(width // 2, height // 2)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
-        enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
-        enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
-        door.draw(670, 320)
-
-        frame = (frame + 1) % 10
+    if attackClass.UDLR == 1 or characterClass.UDLR == 1:
+        attackClass.x += dirX
+        characterClass.x += dirX
         x += dirX
-        delay(0.01)
+        if attackClass.knife_pos == 1:
+            attackClass.draw()
 
-        handle_events()
+        if attackClass.light_pos == 1:
+            attackClass.draw()
 
-    if UDLR == 2:
-        if knife_pos == 1:
-            knife.clip_draw(knife_frame * 40, 40, 40, 40, x - 30, y)
-            update_canvas()
+        characterClass.draw()
+        characterClass.update()
 
-        if attack_pos == 1:
-            attack.clip_draw(attack_frame * 50, 0, 50, 50, x - 50, y - 10)
-            update_canvas()
-
-        character.clip_draw(frame * 50, 100, 50, 50, x, y)
         update_canvas()
 
         clear_canvas()
@@ -190,22 +169,23 @@ while running:
         door.draw(670, 320)
 
         frame = (frame + 1) % 10
+        delay(0.01)
+
+        handle_events()
+
+    if attackClass.UDLR == 2 or characterClass.UDLR == 2:
+        characterClass.x += dirX
+        attackClass.x += dirX
         x += dirX
-        delay(0.01)
+        if attackClass.knife_pos == 1:
+            attackClass.draw()
 
-        handle_events()
-
-    if UDLR == 3:
-
-        if knife_pos == 1:
-            knifeUP.clip_draw(knifeUP_frame * 38, 0, 38, 32, x, y + 40)
+        if attackClass.light_pos == 1:
+            light.clip_draw(light_frame * 50, 0, 50, 50, x - 50, y - 10)
             update_canvas()
 
-        if attack_pos == 1:
-            attack.clip_draw(attack_frame * 50, 0, 50, 50, x, y + 50)
-            update_canvas()
-
-        character.clip_draw(frame * 50, 50, 50, 50, x, y)
+        characterClass.draw()
+        characterClass.update()
         update_canvas()
 
         clear_canvas()
@@ -218,22 +198,24 @@ while running:
         door.draw(670, 320)
 
         frame = (frame + 1) % 10
-        y += dirY
         delay(0.01)
 
         handle_events()
 
-    if UDLR == 4:
+    if attackClass.UDLR == 3 or characterClass.UDLR == 3:
+        characterClass.y += dirY
+        attackClass.y += dirY
+        y += dirY
 
-        if knife_pos == 1:
-            knifeDOWN.clip_draw(knifeDOWN_frame * 40, 0, 40, 46, x, y - 40)
+        if attackClass.knife_pos == 1:
+            attackClass.draw()
+
+        if attackClass.light_pos == 1:
+            light.clip_draw(light_frame * 50, 0, 50, 50, x, y + 50)
             update_canvas()
 
-        if attack_pos == 1:
-            attack.clip_draw(attack_frame * 50, 0, 50, 50, x, y - 50)
-            update_canvas()
-
-        character.clip_draw(frame * 50, 150, 50, 50, x, y)
+        characterClass.draw()
+        characterClass.update()
         update_canvas()
 
         clear_canvas()
@@ -246,7 +228,36 @@ while running:
         door.draw(670, 320)
 
         frame = (frame + 1) % 10
+        delay(0.01)
+
+        handle_events()
+
+    if attackClass.UDLR == 4 or characterClass.UDLR == 4:
+        characterClass.y += dirY
+        attackClass.y += dirY
         y += dirY
+
+        if attackClass.knife_pos == 1:
+            attackClass.draw()
+
+        if attackClass.light_pos == 1:
+            light.clip_draw(light_frame * 50, 0, 50, 50, x, y - 50)
+            update_canvas()
+
+        characterClass.draw()
+        characterClass.update()
+        update_canvas()
+
+        clear_canvas()
+        cave.draw(width // 2, height // 2)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
+        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
+        enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
+        enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
+        door.draw(670, 320)
+
+        frame = (frame + 1) % 10
         delay(0.01)
 
         handle_events()
