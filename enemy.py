@@ -42,7 +42,5 @@ class Enemy:
         # if type == 'enemy1'
         draw_rectangle(*self.get_bb())
 
-        delay(0.001)
-
     def update(self):
         self.frame = (self.frame + 1) % self.frame_count

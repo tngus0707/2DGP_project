@@ -120,6 +120,8 @@ attackClass = attack.Attack(x, y)
 
 characterClass = character.Character(x, y)
 
+#def update():
+
 while running:
     clear_canvas()
     cave.draw(width // 2, height // 2)
@@ -133,10 +135,16 @@ while running:
         if attackClass.knife_pos == 1:
             attackClass.draw()
             attackClass.update()
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
+
 
         if attackClass.light_pos == 1:
             attackClass.draw()
             attackClass.update()
+
+
 
         characterClass.draw()
         characterClass.update()
@@ -158,6 +166,10 @@ while running:
         if attackClass.knife_pos == 1:
             attackClass.draw()
             attackClass.update()
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
+
 
         if attackClass.light_pos == 1:
             attackClass.draw()
@@ -184,6 +196,10 @@ while running:
         if attackClass.knife_pos == 1:
             attackClass.draw()
             attackClass.update()
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
+
 
         if attackClass.light_pos == 1:
             attackClass.draw()
@@ -210,6 +226,9 @@ while running:
         if attackClass.knife_pos == 1:
             attackClass.draw()
             attackClass.update()
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
 
         if attackClass.light_pos == 1:
             attackClass.draw()
@@ -236,6 +255,9 @@ while running:
         if attackClass.knife_pos == 1:
             attackClass.draw()
             attackClass.update()
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
 
         if attackClass.light_pos == 1:
             attackClass.draw()
