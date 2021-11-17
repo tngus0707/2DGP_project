@@ -20,6 +20,17 @@ key_event_Table = {
     (SDL_KEYUP, SDLK_DOWN): DOWN_UP,
 }
 
+def collide(a, b):
+    left_a, bottom_a, right_a, top_a = a.get_bb()
+    left_b, bottom_b, right_b, top_b = b.get_bb()
+
+    if left_a > right_b: return False
+    if right_a < left_b: return False
+    if top_a < bottom_b: return False
+    if bottom_a > top_b: return False
+
+    return True
+
 def handle_events():
     global running
     global dirX
@@ -121,9 +132,11 @@ while running:
     if attackClass.UDLR == 0 or characterClass.UDLR == 0:
         if attackClass.knife_pos == 1:
             attackClass.draw()
+            attackClass.update()
 
         if attackClass.light_pos == 1:
             attackClass.draw()
+            attackClass.update()
 
         characterClass.draw()
         characterClass.update()
@@ -131,16 +144,10 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
-        characters.clip_draw(frame * 50, 350, 50, 50, x, y)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
-        enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
-        enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
         door.draw(670, 320)
-
-        frame = (frame + 1) % 3
-        delay(0.1)
+        for i in enemyClass:
+            i.draw()
+            i.update()
 
         handle_events()
 
@@ -150,9 +157,11 @@ while running:
         x += dirX
         if attackClass.knife_pos == 1:
             attackClass.draw()
+            attackClass.update()
 
         if attackClass.light_pos == 1:
             attackClass.draw()
+            attackClass.update()
 
         characterClass.draw()
         characterClass.update()
@@ -161,15 +170,10 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
-        enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
-        enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
         door.draw(670, 320)
-
-        frame = (frame + 1) % 10
-        delay(0.01)
+        for i in enemyClass:
+            i.draw()
+            i.update()
 
         handle_events()
 
@@ -179,10 +183,11 @@ while running:
         x += dirX
         if attackClass.knife_pos == 1:
             attackClass.draw()
+            attackClass.update()
 
         if attackClass.light_pos == 1:
-            light.clip_draw(light_frame * 50, 0, 50, 50, x - 50, y - 10)
-            update_canvas()
+            attackClass.draw()
+            attackClass.update()
 
         characterClass.draw()
         characterClass.update()
@@ -190,15 +195,10 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
-        enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
-        enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
         door.draw(670, 320)
-
-        frame = (frame + 1) % 10
-        delay(0.01)
+        for i in enemyClass:
+            i.draw()
+            i.update()
 
         handle_events()
 
@@ -209,10 +209,11 @@ while running:
 
         if attackClass.knife_pos == 1:
             attackClass.draw()
+            attackClass.update()
 
         if attackClass.light_pos == 1:
-            light.clip_draw(light_frame * 50, 0, 50, 50, x, y + 50)
-            update_canvas()
+            attackClass.draw()
+            attackClass.update()
 
         characterClass.draw()
         characterClass.update()
@@ -220,15 +221,10 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
-        enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
-        enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
         door.draw(670, 320)
-
-        frame = (frame + 1) % 10
-        delay(0.01)
+        for i in enemyClass:
+            i.draw()
+            i.update()
 
         handle_events()
 
@@ -239,10 +235,11 @@ while running:
 
         if attackClass.knife_pos == 1:
             attackClass.draw()
+            attackClass.update()
 
         if attackClass.light_pos == 1:
-            light.clip_draw(light_frame * 50, 0, 50, 50, x, y - 50)
-            update_canvas()
+            attackClass.draw()
+            attackClass.update()
 
         characterClass.draw()
         characterClass.update()
@@ -250,15 +247,10 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 130)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 160)
-        enemy1.clip_draw(enemy1_frame * 30, 170, 30, 30, 320, 190)
-        enemy2.clip_draw(enemy2_frame * 40, 210, 40, 40, 150, 230)
-        enemy3.clip_draw(enemy3_frame * 33, 40, 33, 40, 180, 480)
         door.draw(670, 320)
-
-        frame = (frame + 1) % 10
-        delay(0.01)
+        for i in enemyClass:
+            i.draw()
+            i.update()
 
         handle_events()
 

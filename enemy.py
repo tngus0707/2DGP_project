@@ -33,9 +33,16 @@ class Enemy:
             self.enemyY = 480
             self.frame_count = 3
 
+    def get_bb(self):
+        # if type == 'enemy1':
+        return self.x - self.sizeX / 2, self.y - self.sizeY / 2, self.x + self.sizeX / 2, self.y + self.sizeY/2
+
     def draw(self):
         self.image.clip_draw(self.frame * self.sizeX, self.bottom, self.sizeX, self.sizeY, self.x, self.y)
+        # if type == 'enemy1'
+        draw_rectangle(*self.get_bb())
+
+        delay(0.001)
 
     def update(self):
         self.frame = (self.frame + 1) % self.frame_count
-        delay(0.03)
