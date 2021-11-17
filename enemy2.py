@@ -9,7 +9,6 @@ class Enemy:
 
         if type == 'enemy1':
             self.image = load_image('enemy1.png')
-            self.image2 = load_image('enemy1.png')
             self.sizeX = 30
             self.sizeY = 30
             self.bottom = 170
@@ -19,7 +18,6 @@ class Enemy:
 
         if type == 'enemy2':
             self.image = load_image('enemy2.png')
-            self.image2 = load_image('enemy2.png')
             self.sizeX = 40
             self.sizeY = 40
             self.bottom = 210
@@ -29,7 +27,6 @@ class Enemy:
 
         if type == 'enemy3':
             self.image = load_image('enemy3.png')
-            self.image2 = load_image('enemy3.png')
             self.sizeX = 33
             self.sizeY = 40
             self.bottom = 40
@@ -42,10 +39,6 @@ class Enemy:
 
     def draw(self):
         self.image.clip_draw(self.frame * self.sizeX, self.bottom, self.sizeX, self.sizeY, self.x, self.y)
-        draw_rectangle(*self.get_bb())
-
-    def draw2(self):
-        self.image2.clip_draw(self.frame * self.sizeX, self.bottom, self.sizeX, self.sizeY, self.x, self.y)
         draw_rectangle(*self.get_bb())
 
     def update(self):

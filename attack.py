@@ -8,8 +8,10 @@ class Attack:
         self.UDLR = 0
         self.knife_pos = 0
         self.light_pos = 0
+        self.skill_pos = 0
         self.image = load_image('knife.png')
         self.image2 = load_image('attack.png')
+        self.image3 = load_image('skill.png')
 
     def get_bb(self):
         if self.knife_pos == 1:
@@ -32,6 +34,15 @@ class Attack:
             if self.UDLR == 4:
                 return self.x - 15, self. y - 50 - 15, self.x + 15, self.y - 50 + 15
 
+        if self.skill_pos == 1:
+            if self.UDLR == 1:
+                return self.x + 50 - 20, self.y - 10 - 15, self.x + 50 + 10, self.y - 10 + 15
+            if self.UDLR == 2:
+                return self.x - 50 - 20, self.y - 10 - 15, self.x - 50 + 10, self.y - 10 + 15
+            if self.UDLR == 3:
+                return self.x - 20, self.y + 50 - 15, self.x + 10, self.y + 50 + 15
+            if self.UDLR == 4:
+                return self.x - 20, self.y - 50 - 15, self.x + 10, self.y - 50 + 15
 
     def draw(self):
         if self.knife_pos == 1:
@@ -55,6 +66,16 @@ class Attack:
             if self.UDLR == 4:
                 self.image2.clip_draw(self.frame * 50, 50, 50, 50, self.x, self.y - 50)
 
+        if self.skill_pos == 1:
+            if self.UDLR == 1:
+                self.image3.clip_draw(self.frame * 50, 50, 50, 50, self.x + 50, self.y - 10)
+            if self.UDLR == 2:
+                self.image3.clip_draw(self.frame * 50, 50, 50, 50, self.x - 50, self.y - 10)
+            if self.UDLR == 3:
+                self.image3.clip_draw(self.frame * 50, 50, 50, 50, self.x, self.y + 50)
+            if self.UDLR == 4:
+                self.image3.clip_draw(self.frame * 50, 50, 50, 50, self.x, self.y - 50)
+
     def update(self):
         if self.knife_pos == 1:
             if self.UDLR == 0:
@@ -69,6 +90,12 @@ class Attack:
                 self.frame = (self.frame + 3) % 2
 
         if self.light_pos == 1:
+            if self.UDLR == 0:
+                self.frame = (self.frame + 1) % 5
+            if self.UDLR == 1 or self.UDLR == 2 or self.UDLR == 3 or self.UDLR == 4:
+                self.frame = (self.frame + 1) % 5
+
+        if self.skill_pos == 1:
             if self.UDLR == 0:
                 self.frame = (self.frame + 1) % 5
             if self.UDLR == 1 or self.UDLR == 2 or self.UDLR == 3 or self.UDLR == 4:

@@ -31,6 +31,17 @@ def collide(a, b):
 
     return True
 
+def collide2(a, b):
+    left_a, bottom_a, right_a, top_a = a.get_bb()
+    left_b, bottom_b, right_b, top_b = b.get_bb()
+
+    if left_a > right_b + 50: return False
+    if right_a < left_b - 50: return False
+    if top_a < bottom_b - 50: return False
+    if bottom_a > top_b + 50: return False
+
+    return True
+
 def handle_events():
     global running
     global dirX
@@ -63,8 +74,14 @@ def handle_events():
             elif event.key == SDLK_k:
                 attackClass.knife_pos = 1
                 attackClass.light_pos = 0
+                attackClass.skill_pos = 0
             elif event.key == SDLK_l:
                 attackClass.light_pos = 1
+                attackClass.knife_pos = 0
+                attackClass.skill_pos = 0
+            elif event.key == SDLK_s:
+                attackClass.skill_pos = 1
+                attackClass.light_pos = 0
                 attackClass.knife_pos = 0
             elif event.key == SDLK_ESCAPE:
                 running = False
@@ -120,9 +137,9 @@ attackClass = attack.Attack(x, y)
 
 characterClass = character.Character(x, y)
 
-#def update():
-
 while running:
+    delay(0.05)
+
     clear_canvas()
     cave.draw(width // 2, height // 2)
     for i in enemyClass:
@@ -138,13 +155,16 @@ while running:
             for en in enemyClass:
                 if collide(attackClass, en):
                     enemyClass.remove(en)
-
+                    characterClass.point += 1
 
         if attackClass.light_pos == 1:
             attackClass.draw()
             attackClass.update()
 
-
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
+                    characterClass.point += 1
 
         characterClass.draw()
         characterClass.update()
@@ -169,11 +189,28 @@ while running:
             for en in enemyClass:
                 if collide(attackClass, en):
                     enemyClass.remove(en)
-
+                    characterClass.point += 1
 
         if attackClass.light_pos == 1:
             attackClass.draw()
             attackClass.update()
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
+                    characterClass.point += 1
+
+        if attackClass.skill_pos == 1:
+            attackClass.draw()
+            attackClass.update()
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
+                    characterClass.point += 1
+
+            # for en in enemyClass:
+            #     if collide2(attackClass, en):
+            #         enemyClass.remove(en)
+            #         attackClass.draw2()
 
         characterClass.draw()
         characterClass.update()
@@ -199,11 +236,23 @@ while running:
             for en in enemyClass:
                 if collide(attackClass, en):
                     enemyClass.remove(en)
-
+                    characterClass.point += 1
 
         if attackClass.light_pos == 1:
             attackClass.draw()
             attackClass.update()
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
+                    characterClass.point += 1
+
+        if attackClass.skill_pos == 1:
+            attackClass.draw()
+            attackClass.update()
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
+                    characterClass.point += 1
 
         characterClass.draw()
         characterClass.update()
@@ -229,10 +278,24 @@ while running:
             for en in enemyClass:
                 if collide(attackClass, en):
                     enemyClass.remove(en)
+                    characterClass.point += 1
 
         if attackClass.light_pos == 1:
             attackClass.draw()
             attackClass.update()
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
+                    characterClass.point += 1
+
+
+        if attackClass.skill_pos == 1:
+            attackClass.draw()
+            attackClass.update()
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
+                    characterClass.point += 1
 
         characterClass.draw()
         characterClass.update()
@@ -258,10 +321,23 @@ while running:
             for en in enemyClass:
                 if collide(attackClass, en):
                     enemyClass.remove(en)
+                    characterClass.point += 1
 
         if attackClass.light_pos == 1:
             attackClass.draw()
             attackClass.update()
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
+                    characterClass.point += 1
+
+        if attackClass.skill_pos == 1:
+            attackClass.draw()
+            attackClass.update()
+            for en in enemyClass:
+                if collide(attackClass, en):
+                    enemyClass.remove(en)
+                    characterClass.point += 1
 
         characterClass.draw()
         characterClass.update()
@@ -274,8 +350,8 @@ while running:
             i.draw()
             i.update()
 
+
         handle_events()
 
 handle_events()
-
 close_canvas()
