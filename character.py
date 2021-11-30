@@ -26,7 +26,7 @@ class Character:
             self.image.clip_draw(self.frame * 50, 150, 50, 50, self.x, self.y)
         self.font.draw(self.x - 30, self.y + 30, 'score : ' + str(self.point), (255, 255, 0))
 
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
     def update(self):
         if self.UDLR == 0:

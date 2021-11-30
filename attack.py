@@ -54,7 +54,7 @@ class Attack:
                 self.image.clip_draw((self.frame + 5) * 35, 160, 35, 32, self.x, self.y + 20)
             if self.UDLR == 4:
                 self.image.clip_draw((self.frame + 1) * 40, 0, 40, 46, self.x - 5, self.y - 15)
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
         if self.light_pos == 1:
             if self.UDLR == 1:

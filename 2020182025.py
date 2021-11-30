@@ -350,7 +350,6 @@ while running:
             i.draw()
             i.update()
 
-
         handle_events()
 
 handle_events()
