@@ -179,6 +179,7 @@ while running:
 
         handle_events()
 
+
     if attackClass.UDLR == 1 or characterClass.UDLR == 1:
         attackClass.x += dirX
         characterClass.x += dirX
