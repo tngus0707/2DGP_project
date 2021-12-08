@@ -2,9 +2,10 @@ from pico2d import *
 import enemy
 import attack
 import character
+import Eattack
 
 width, height = 800, 600
-
+touch = False
 def collide(a, b):
     left_a, bottom_a, right_a, top_a = a.get_bb()
     left_b, bottom_b, right_b, top_b = b.get_bb()
@@ -118,6 +119,11 @@ enemyClass.append(enemy.Enemy(320, 190, 'enemy1'))
 enemyClass.append(enemy.Enemy(150, 230, 'enemy2'))
 enemyClass.append(enemy.Enemy(180, 480, 'enemy3'))
 
+EattackClass = []
+EattackClass.append(Eattack.EnemyAttack(350, 130, 'enemy1_attack'))
+EattackClass.append(Eattack.EnemyAttack(350, 160, 'enemy1_attack'))
+EattackClass.append(Eattack.EnemyAttack(350, 190, 'enemy1_attack'))
+
 attackClass = attack.Attack(x, y)
 
 characterClass = character.Character(x, y)
@@ -128,6 +134,9 @@ while running:
     clear_canvas()
     cave.draw(width // 2, height // 2)
     for i in enemyClass:
+        i.draw()
+        i.update()
+    for i in EattackClass:
         i.draw()
         i.update()
 
@@ -143,11 +152,6 @@ while running:
         if attackClass.knife_pos == 1:
             attackClass.draw()
             attackClass.update()
-            for en in enemyClass:
-                if collide(attackClass, en):
-                    enemyClass.remove(en)
-                    characterClass.point += 1
-                    characterClass.cnt += 1
 
         if attackClass.light_pos == 1:
             attackClass.draw()
@@ -177,14 +181,28 @@ while running:
         attackClass.x += dirX
         characterClass.x += dirX
         x += dirX
+        for e_attack in EattackClass:
+            if collide(characterClass, e_attack):
+                characterClass.hp -= 10
+                characterClass.x -= 10
+
+        for en in enemyClass:
+            if collide(characterClass, en):
+                characterClass.hp -= 10
+                characterClass.x -= 10
+
         if attackClass.knife_pos == 1:
             attackClass.draw()
             attackClass.update()
+
             for en in enemyClass:
                 if collide(attackClass, en):
                     enemyClass.remove(en)
                     characterClass.point += 1
                     characterClass.cnt += 1
+            # for ea in EattackClass:
+            #     if collide(attackClass, ea):
+            #         EattackClass.remove(ea)
 
         if attackClass.light_pos == 1:
             attackClass.draw()
@@ -192,7 +210,6 @@ while running:
             for en in enemyClass:
                 if collide(attackClass, en):
                     enemyClass.remove(en)
-                    enemyClass.dead = 1
                     characterClass.point += 1
                     characterClass.cnt += 1
 
@@ -229,14 +246,28 @@ while running:
         characterClass.x += dirX
         attackClass.x += dirX
         x += dirX
+        for e_attack in EattackClass:
+            if collide(characterClass, e_attack):
+                characterClass.hp -= 10
+                characterClass.x += 10
+
+        for en in enemyClass:
+            if collide(characterClass, en):
+                characterClass.hp -= 10
+                characterClass.x += 10
+
         if attackClass.knife_pos == 1:
             attackClass.draw()
             attackClass.update()
+
             for en in enemyClass:
                 if collide(attackClass, en):
                     enemyClass.remove(en)
                     characterClass.point += 1
                     characterClass.cnt += 1
+            # for ea in EattackClass:
+            #     if collide(attackClass, ea):
+            #         EattackClass.remove(ea)
 
         if attackClass.light_pos == 1:
             attackClass.draw()
@@ -273,15 +304,30 @@ while running:
         characterClass.y += dirY
         attackClass.y += dirY
         y += dirY
+        for e_attack in EattackClass:
+            if collide(characterClass, e_attack):
+                characterClass.hp -= 10
+                characterClass.y += 10
+
+        for en in enemyClass:
+            if collide(characterClass, en):
+                characterClass.hp -= 10
+                characterClass.y -= 10
 
         if attackClass.knife_pos == 1:
             attackClass.draw()
             attackClass.update()
+
             for en in enemyClass:
                 if collide(attackClass, en):
                     enemyClass.remove(en)
                     characterClass.point += 1
                     characterClass.cnt += 1
+                    for ea in EattackClass:
+                        EattackClass.remove(ea)
+            # for ea in EattackClass:
+            #     if collide(attackClass, ea):
+            #         EattackClass.remove(ea)
 
         if attackClass.light_pos == 1:
             attackClass.draw()
@@ -318,15 +364,32 @@ while running:
         characterClass.y += dirY
         attackClass.y += dirY
         y += dirY
+        for e_attack in EattackClass:
+            if collide(characterClass, e_attack):
+                characterClass.hp -= 10
+                characterClass.y -= 10
+
+        for en in enemyClass:
+            if collide(characterClass, en):
+                characterClass.hp -= 10
+                characterClass.y += 10
 
         if attackClass.knife_pos == 1:
             attackClass.draw()
             attackClass.update()
+
             for en in enemyClass:
                 if collide(attackClass, en):
                     enemyClass.remove(en)
                     characterClass.point += 1
                     characterClass.cnt += 1
+                    for ea in EattackClass:
+                        EattackClass.remove(ea)
+            # for ea in EattackClass:
+            #     if collide(attackClass, ea):
+            #         EattackClass.remove(ea)
+
+
 
         if attackClass.light_pos == 1:
             attackClass.draw()
