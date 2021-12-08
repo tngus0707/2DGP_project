@@ -4,21 +4,8 @@ import attack
 import character
 
 width, height = 800, 600
-
-#character Event
-UP_DOWN, DOWN_DOWN, RIGHT_DOWN, LEFT_DOWN, UP_UP, DOWN_UP, RIGHT_UP, LEFT_UP = range(8)
-
-key_event_Table = {
-    (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
-    (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
-    (SDL_KEYDOWN, SDLK_UP): UP_DOWN,
-    (SDL_KEYDOWN, SDLK_DOWN): DOWN_DOWN,
-
-    (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
-    (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
-    (SDL_KEYUP, SDLK_UP): UP_UP,
-    (SDL_KEYUP, SDLK_DOWN): DOWN_UP,
-}
+dirX = 0
+dirY = 0
 
 def collide(a, b):
     left_a, bottom_a, right_a, top_a = a.get_bb()
@@ -99,7 +86,7 @@ def handle_events():
 
 open_canvas(width, height)
 
-cave = load_image('cave.png')
+cave = load_image('grass.png')
 characters = load_image('animation_sheet.png')
 enemy1 = load_image('enemy1.png')
 enemy2 = load_image('enemy2.png')
@@ -108,7 +95,6 @@ knife = load_image('knife.png')
 light = load_image('attack.png')
 knifeUP = load_image('knife_up.png')
 knifeDOWN = load_image('knife_down.png')
-door = load_image('door.png')
 
 running = True
 
@@ -146,7 +132,6 @@ while running:
         i.draw()
         i.update()
 
-    door.draw(670, 320)
 
     if attackClass.UDLR == 0 or characterClass.UDLR == 0:
         if attackClass.knife_pos == 1:
@@ -172,7 +157,6 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
-        door.draw(670, 320)
         for i in enemyClass:
             i.draw()
             i.update()
@@ -220,7 +204,6 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
-        door.draw(670, 320)
         for i in enemyClass:
             i.draw()
             i.update()
@@ -261,7 +244,6 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
-        door.draw(670, 320)
         for i in enemyClass:
             i.draw()
             i.update()
@@ -304,7 +286,6 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
-        door.draw(670, 320)
         for i in enemyClass:
             i.draw()
             i.update()
@@ -346,7 +327,6 @@ while running:
 
         clear_canvas()
         cave.draw(width // 2, height // 2)
-        door.draw(670, 320)
         for i in enemyClass:
             i.draw()
             i.update()

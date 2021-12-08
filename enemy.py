@@ -5,7 +5,7 @@ class Enemy:
         self.frame = 0
         self.x = x
         self.y = y
-        self.dead = False
+        self.dead = 0
 
         if type == 'enemy1':
             self.image = load_image('enemy1.png')
@@ -44,9 +44,9 @@ class Enemy:
         self.image.clip_draw(self.frame * self.sizeX, self.bottom, self.sizeX, self.sizeY, self.x, self.y)
         draw_rectangle(*self.get_bb())
 
-    def draw2(self):
-        self.image2.clip_draw(self.frame * self.sizeX, self.bottom, self.sizeX, self.sizeY, self.x, self.y)
-        draw_rectangle(*self.get_bb())
+    # def draw2(self):
+    #     self.image2.clip_draw(self.frame * self.sizeX, self.bottom, self.sizeX, self.sizeY, self.x, self.y)
+    #     draw_rectangle(*self.get_bb())
 
     def update(self):
         self.frame = (self.frame + 1) % self.frame_count
