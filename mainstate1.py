@@ -219,7 +219,6 @@ while running:
             for en in enemyClass:
                 if collide(attackClass, en):
                     enemyClass.remove(en)
-                    enemyClass.dead = 1
                     characterClass.point += 1
                     characterClass.cnt += 1
 
